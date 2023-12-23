@@ -7,8 +7,9 @@
 
         internal static void Clean(this InventorySlotData source)
         {
-            source.Amount = 0;
-            source.ItemId = null;
+            source.Item = null;
+            //source.Amount = 0;
+            //source.ItemId = null;
         }
     }
 }

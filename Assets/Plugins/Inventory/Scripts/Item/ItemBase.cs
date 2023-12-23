@@ -10,8 +10,6 @@ namespace InventorySystem
         [field: SerializeField] public int InventorySlotCapacity { get; private set; } = 1;
         [field: SerializeField] public Texture2D Icon { get; private set; } = null;
 
-        public string Name { get; set; } = "name";
-
         protected virtual void Awake()
         {
             if (string.IsNullOrEmpty(ID)) GenerateNewID();

@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 5933f4b1-c303-4301-8fcf-496ac6f279e5
-  <InventorySlotCapacity>k__BackingField: 90000
+  <InventorySlotCapacity>k__BackingField: 5
   <Icon>k__BackingField: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}

@@ -43,23 +43,24 @@ namespace InventorySystem
 
         internal void ResizeInventory()
         {
-            InventoryConfig = new InventoryConfig() { InventorySize = new Vector2Int(Rows, Columns), };
-            int inventorySize = InventoryConfig.InventorySize.x * InventoryConfig.InventorySize.y;
-            InventoryData InventoryData = new InventoryData();
-            InventoryData.InitializeEmpty(inventorySize);
+            var inventoryConfig = new InventoryConfig() { InventorySize = new Vector2Int(Rows, Columns), };
+            int inventorySize = inventoryConfig.InventorySize.x * inventoryConfig.InventorySize.y;
+            InventoryData inventoryData = new InventoryData();
+            inventoryData.InitializeEmpty(inventorySize);
             if (this.InventoryData != null)
             {
-                for (int i = 0; i < InventoryData.Slots.Count; i++)
+                for (int i = 0; i < inventoryData.Slots.Count; i++)
                 {
                     if (this.InventoryData.Slots != null && i < this.InventoryData.Slots.Count)
                     {
                         if (this.InventoryData.Slots[i] != null)
-                            InventoryData.Slots[i] = this.InventoryData.Slots[i];
+                            inventoryData.Slots[i] = this.InventoryData.Slots[i];
                     }
                     else break;
                 }
             }
-            this.InventoryData = InventoryData;
+            this.InventoryData = inventoryData;
+            this.InventoryConfig = inventoryConfig;
         }
 #endif
 

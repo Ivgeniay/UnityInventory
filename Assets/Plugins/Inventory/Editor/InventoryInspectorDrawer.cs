@@ -27,8 +27,9 @@ public class AssetHandler
 [CustomEditor(typeof(CharacterInventoryComponent))]
 internal class InventoryInspectorDrawer : Editor
 {
-    private const string TREE_PATH = "Assets/Plugins/Inventory/Editor/UI/InventoryUI.uxml";
-    private const string STYLE_PATH = "Assets/Plugins/Inventory/Editor/UI/InventoryUI.uss";
+    private const string TREE_PATH = "Assets/Plugins/Inventory/UI/InventoryUI.uxml";
+    private const string CELL_TREE_PATH = "Assets/Plugins/Inventory/UI/InventoryCell/Cell.uxml";
+    private const string STYLE_PATH = "Assets/Plugins/Inventory/UI/InventoryUI.uss";
 
     [SerializeField] private VisualTreeAsset tree;
     [SerializeField] private StyleSheet styles;
@@ -74,7 +75,7 @@ internal class InventoryInspectorDrawer : Editor
     public override VisualElement CreateInspectorGUI()
     {
         inventoryComponent = (CharacterInventoryComponent)target;
-        if (inventoryComponent == null) { throw new System.Exception(); }
+        if (inventoryComponent == null) return null;
 
         inventoryComponent.InitializeFromEditor();
         serializedObject.ApplyModifiedProperties();
@@ -141,6 +142,7 @@ internal class InventoryInspectorDrawer : Editor
     private VisualElement CreateCell(CharacterInventoryComponent inventoryComponent, int slotIndex, VisualElement parentVisualElement)
     {
         VisualElement cell = new();
+        if (cellTree is null) cellTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(CELL_TREE_PATH);
         cellTree.CloneTree(cell);
 
         VisualElement inputField = cell.Q<VisualElement>(null, "unity-base-field__input");
@@ -148,12 +150,18 @@ internal class InventoryInspectorDrawer : Editor
             inputField.style.backgroundColor = new StyleColor(Color.clear);
 
         InventorySlotData slotData = inventoryComponent.InventoryData.Slots[slotIndex];
+
         ObjectField obField = cell.GetElement<ObjectField>();
         VisualElement cellBackground = cell.Q<VisualElement>("cellBackground");
         if (slotData.Item != null)
             cellBackground.style.backgroundImage = slotData.Item.Icon;
         
         Label counter = cell.Q<Label>("counter");
+        slotData.OnUpdate += (e) => 
+        {
+            obField.value = e.Item;
+            UpdateCounter(counter, e.Amount, e.Sender.SlotCapacity); 
+        };
         obField.RegisterValueChangedCallback(ObjectFieldCallback(slotData, cellBackground, counter));
 
         counter.text = string.Concat(slotData.Amount, " / ", slotData.SlotCapacity);
@@ -164,17 +172,23 @@ internal class InventoryInspectorDrawer : Editor
             if (slotData.Item != null && slotData.Amount < slotData.SlotCapacity)
             {
                 slotData.Amount += 1;
-                counter.text = string.Concat(slotData.Amount, " / ", slotData.SlotCapacity);
                 OnApply();
             } 
         };
 
         decrementButton.clicked += () => {
-            if (slotData.Item != null && slotData.Amount > 0)
+            if (slotData.Item != null)
             {
-                slotData.Amount -= 1;
-                counter.text = string.Concat(slotData.Amount, " / ", slotData.SlotCapacity);
-                OnApply();
+                if (slotData.Amount > 1)
+                {
+                    slotData.Amount -= 1;
+                    OnApply();
+                }
+                else
+                {
+                    slotData.Clean();
+                    OnApply();
+                }
             }
         };
 
@@ -184,6 +198,10 @@ internal class InventoryInspectorDrawer : Editor
         parentVisualElement.Add(cell);
         return cell;
     }
+
+    private void UpdateCounter(Label counter, int amount, int capacity) =>
+        counter.text = string.Concat(amount, " / ", capacity);
+    
 
     private EventCallback<ChangeEvent<Object>> ObjectFieldCallback(InventorySlotData slotData, VisualElement cellBackground, Label counter)
     {
@@ -197,11 +215,13 @@ internal class InventoryInspectorDrawer : Editor
             if (slotData != null && slotData.Item != null && slotData.Item.Icon != null)
             {
                 cellBackground.style.backgroundImage = slotData.Item.Icon;
+                if (slotData.Amount == 0) slotData.Amount += 1; 
+                ItemsDataBase.Instance.AddItem(value);
             }
             else
                 cellBackground.style.backgroundImage = null;
 
-            counter.text = string.Concat(slotData.Amount, " / ", slotData.SlotCapacity);
+            UpdateCounter(counter, slotData.Amount, slotData.SlotCapacity);
             OnApply();
         };
     }

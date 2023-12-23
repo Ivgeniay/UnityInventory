@@ -6,6 +6,8 @@ namespace InventorySystem
     [System.Serializable]
     public class InventorySlotData
     {
+        public event Action<InventorySlotUpdate> OnUpdate;
+
         [SerializeField] public ItemBase item;
         [SerializeField] private int amount;
 
@@ -16,7 +18,8 @@ namespace InventorySystem
                 if (value == null)
                     amount = 0;
                 
-                item = value; 
+                item = value;
+                OnUpdate?.Invoke(new InventorySlotUpdate(this, item, amount));
             }
         }
         public virtual string ItemId
@@ -45,7 +48,6 @@ namespace InventorySystem
             {
                 if (Item != null)
                 {
-                    if (amount == 0) return 1;
                     return amount;
                 }
                 else return 0;
@@ -54,10 +56,8 @@ namespace InventorySystem
             {
                 if (Item != null) amount = value;
                 else amount = 0;
+                OnUpdate?.Invoke(new InventorySlotUpdate(this, item, amount));
             }
         }
-
-        //public virtual string ItemId { get; set; }
-        //public virtual int SlotCapacity { get; set; } 
     }
 }
