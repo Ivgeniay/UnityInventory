@@ -551,8 +551,9 @@ MonoBehaviour:
     InventorySize: {x: 1, y: 5}
   InventoryData:
     Slots:
-    - item: {fileID: 0}
-      amount: 0
+    - item: {fileID: 2065003650981607483, guid: c53837824c15aa64c96352665697b8f9,
+        type: 3}
+      amount: 1
     - item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
       amount: 2
     - item: {fileID: 0}

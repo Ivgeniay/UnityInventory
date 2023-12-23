@@ -6,15 +6,15 @@ namespace InventorySystem
     [System.Serializable]
     public class ItemBase : MonoBehaviour
     {
-        [field: SerializeField] public string ID { get; private set; }
+        [field: SerializeField] public string ID { get => gameObject.GetInstanceID().ToString(); }
         [field: SerializeField] public int InventorySlotCapacity { get; private set; } = 1;
-        [field: SerializeField] public Texture2D Icon { get; private set; } = null;
+        [field: SerializeField] public Texture2D Icon { get; private set; } = null; 
 
         protected virtual void Awake()
         {
-            if (string.IsNullOrEmpty(ID)) GenerateNewID();
+            //if (string.IsNullOrEmpty(ID)) GenerateNewID();
         }
 
-        public void GenerateNewID() => ID = Guid.NewGuid().ToString();
+        public void GenerateNewID() { }// ID = Guid.NewGuid().ToString();
     }
 }
