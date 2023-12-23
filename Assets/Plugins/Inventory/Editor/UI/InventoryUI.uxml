@@ -1,8 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/Plugins/Inventory/Editor/UI/InventoryUI.uss?fileID=7433441132597879392&amp;guid=b1396c9c0c48a42489cd0ec8d5c17d40&amp;type=3#InventoryUI" />
     <ui:VisualElement name="parameters" style="flex-grow: 0.1; opacity: 1; display: flex; visibility: visible; overflow: visible; position: relative; height: -8px; flex-basis: auto; flex-shrink: 0.2;">
-        <ui:IntegerField label="Rows" value="0" name="rowField" binding-path="Rows" />
-        <ui:IntegerField label="Columns" value="0" name="colField" binding-path="Columns" />
+        <ui:VisualElement name="parametersContainer" style="flex-grow: 1; flex-direction: row; flex-wrap: wrap; align-items: stretch; justify-content: center;">
+            <ui:IntegerField label="Rows" value="0" name="rowField" />
+            <ui:IntegerField label="Columns" value="0" name="colField" />
+        </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="inventory" style="flex-grow: 1; border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 9px; border-top-right-radius: 9px; border-bottom-right-radius: 9px; border-bottom-left-radius: 9px; flex-direction: column; border-left-color: rgb(41, 41, 41); border-right-color: rgb(41, 41, 41); border-top-color: rgb(41, 41, 41); border-bottom-color: rgb(41, 41, 41); visibility: visible; display: flex; overflow: hidden; background-image: none; opacity: 1; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 2px; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-wrap: nowrap;" />
 </ui:UXML>

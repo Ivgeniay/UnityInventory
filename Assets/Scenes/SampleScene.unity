@@ -459,60 +459,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774574ec03ff3a8438d30b4a768c3f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rows: 5
-  Columns: 5
+  Rows: 3
+  Columns: 6
   InventoryData:
     Slots:
     - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
+      amount: 6
+    - Item: {fileID: 0}
+      amount: 0
+    - Item: {fileID: 0}
+      amount: 0
+    - Item: {fileID: 0}
+      amount: 0
+    - Item: {fileID: 0}
+      amount: 0
+    - Item: {fileID: 0}
+      amount: 0
     - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
+      amount: 161
     - Item: {fileID: 0}
-      Amount: 0
+      amount: 0
     - Item: {fileID: 0}
-      Amount: 0
+      amount: 0
     - Item: {fileID: 0}
-      Amount: 0
+      amount: 0
+    - Item: {fileID: 0}
+      amount: 0
+    - Item: {fileID: 0}
+      amount: 0
     - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
+      amount: 5
+    - Item: {fileID: 0}
+      amount: 0
     - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
+      amount: 0
     - Item: {fileID: 0}
-      Amount: 0
+      amount: 0
     - Item: {fileID: 0}
-      Amount: 0
+      amount: 0
     - Item: {fileID: 0}
-      Amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
-    - Item: {fileID: 0}
-      Amount: 0
-    - Item: {fileID: 0}
-      Amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
-    - Item: {fileID: 0}
-      Amount: 0
-    - Item: {fileID: 0}
-      Amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
-    - Item: {fileID: 0}
-      Amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
-    - Item: {fileID: 0}
-      Amount: 0
-    - Item: {fileID: 0}
-      Amount: 0
-    - Item: {fileID: 0}
-      Amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      Amount: 0
+      amount: 0
 --- !u!65 &1447225376
 BoxCollider:
   m_ObjectHideFlags: 0

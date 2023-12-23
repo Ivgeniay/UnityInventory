@@ -7,7 +7,7 @@ namespace InventorySystem
     public class InventorySlotData
     {
         [SerializeField] public ItemBase Item;
-        [SerializeField] public int Amount;
+        [SerializeField] private int amount;
         public virtual string ItemId
         {
             get
@@ -23,9 +23,27 @@ namespace InventorySystem
             get
             {
                 if (Item != null) return Item.InventorySlotCapacity;
-                else return int.MaxValue;
+                else return 0;
             }
             set { }
+        }
+
+        public int Amount
+        {
+            get
+            {
+                if (Item != null)
+                {
+                    if (amount == 0) return 1;
+                    return amount;
+                }
+                else return 0;
+            }
+            set
+            {
+                if (Item != null) amount = value;
+                else amount = 0;
+            }
         }
 
         //public virtual string ItemId { get; set; }

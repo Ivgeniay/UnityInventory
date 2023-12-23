@@ -8,3 +8,22 @@
     min-width: 15px;
     min-height: 15px;
 }
+
+.infoText {
+    width: 70px;
+    font-size: 9px;
+    -unity-text-align: middle-center;
+    text-overflow: clip;
+    white-space: normal;
+    justify-content: center;
+    align-self: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.infoButton {
+    width: 8px;
+    justify-content: flex-start;
+    visibility: visible;
+    opacity: 0.5;
+}

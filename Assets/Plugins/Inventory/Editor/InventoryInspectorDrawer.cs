@@ -39,16 +39,10 @@ internal class InventoryInspectorDrawer : Editor
     private VisualElement cachedVisualTree;
     private VisualElement inventory;
 
-    private bool IsInitialize
-    {
-        get => EditorPrefs.GetBool(inventoryComponent.GetInstanceID().ToString()); 
-        set => EditorPrefs.SetBool(inventoryComponent.GetInstanceID().ToString(), value);
-    }
-
     private SerializedObject serializedObjectt;
     private SerializedProperty rowsProperty;
     private SerializedProperty columnsProperty;
-    private SerializedProperty inventoryDataProperty;
+
     CharacterInventoryComponent inventoryComponent;
 
     //public override void OnInspectorGUI()
@@ -63,10 +57,8 @@ internal class InventoryInspectorDrawer : Editor
 
     private void OnDisable()
     {
-        //bool notInit = !IsInitialize;
-        //if (notInit) return;
-
-        Debug.Log("OnDisable");
+        inventoryRow.Clear();
+        slotCell.Clear();
     }
 
     private void OnEnable()
@@ -74,16 +66,15 @@ internal class InventoryInspectorDrawer : Editor
         serializedObjectt = new SerializedObject(target);
         rowsProperty = serializedObject.FindProperty("Rows");
         columnsProperty = serializedObject.FindProperty("Columns");
-        inventoryDataProperty = serializedObject.FindProperty("InventoryData");
+
+        inventoryRow = new();
+        slotCell = new();
     }
 
     public override VisualElement CreateInspectorGUI()
     {
         inventoryComponent = (CharacterInventoryComponent)target;
         if (inventoryComponent == null) { throw new System.Exception(); }
-
-        inventoryRow = new();
-        slotCell = new();
 
         inventoryComponent.InitializeFromEditor();
         serializedObject.ApplyModifiedProperties();
@@ -164,6 +155,29 @@ internal class InventoryInspectorDrawer : Editor
         
         obField.RegisterValueChangedCallback(ObjectFieldCallback(slotData, cellBackground));
 
+        Label counter = cell.Q<Label>("counter");
+        counter.text = string.Concat(slotData.Amount, " / ", slotData.SlotCapacity);
+        Button incrementButton = cell.Q<Button>("increment");
+        Button decrementButton = cell.Q<Button>("decrement");
+
+        incrementButton.clicked += () => {
+            if (slotData.Item != null && slotData.Amount < slotData.SlotCapacity)
+            {
+                slotData.Amount += 1;
+                counter.text = string.Concat(slotData.Amount, " / ", slotData.SlotCapacity);
+                OnApply();
+            } 
+        };
+
+        decrementButton.clicked += () => {
+            if (slotData.Item != null && slotData.Amount > 0)
+            {
+                slotData.Amount -= 1;
+                counter.text = string.Concat(slotData.Amount, " / ", slotData.SlotCapacity);
+                OnApply();
+            }
+        };
+
         if (slotData != null)
             obField.value = slotData.Item;
 
@@ -204,14 +218,34 @@ internal class InventoryInspectorDrawer : Editor
     } 
     private void OnColumnChange(ChangeEvent<int> e)
     {
-        columnsProperty.intValue = e.newValue;
+        int result = 1;
+        if (e.newValue > 0) result = e.newValue;
+        else
+        {
+            IntegerField source = e.target as IntegerField;
+            if (source != null)
+                source.value = result; 
+        }
+        
+        columnsProperty.intValue = result;
+        inventoryComponent.Columns = result;
         ((CharacterInventoryComponent)target).ResizeInventory();
         DrawInventory(inventory);
         OnApply();
     } 
     private void OnRowChange(ChangeEvent<int> e)
     {
-        rowsProperty.intValue = e.newValue;
+        int result = 1;
+        if (e.newValue > 0) result = e.newValue;
+        else
+        {
+            IntegerField source = e.target as IntegerField;
+            if (source != null)
+                source.value = result;
+        }
+
+        rowsProperty.intValue = result;
+        inventoryComponent.Rows = result;
         ((CharacterInventoryComponent)target).ResizeInventory();
         DrawInventory(inventory);
         OnApply();
