@@ -153,9 +153,9 @@ internal class InventoryInspectorDrawer : Editor
         if (slotData.Item != null)
             cellBackground.style.backgroundImage = slotData.Item.Icon;
         
-        obField.RegisterValueChangedCallback(ObjectFieldCallback(slotData, cellBackground));
-
         Label counter = cell.Q<Label>("counter");
+        obField.RegisterValueChangedCallback(ObjectFieldCallback(slotData, cellBackground, counter));
+
         counter.text = string.Concat(slotData.Amount, " / ", slotData.SlotCapacity);
         Button incrementButton = cell.Q<Button>("increment");
         Button decrementButton = cell.Q<Button>("decrement");
@@ -185,7 +185,7 @@ internal class InventoryInspectorDrawer : Editor
         return cell;
     }
 
-    private EventCallback<ChangeEvent<Object>> ObjectFieldCallback(InventorySlotData slotData, VisualElement cellBackground)
+    private EventCallback<ChangeEvent<Object>> ObjectFieldCallback(InventorySlotData slotData, VisualElement cellBackground, Label counter)
     {
         return e =>
         {
@@ -201,6 +201,7 @@ internal class InventoryInspectorDrawer : Editor
             else
                 cellBackground.style.backgroundImage = null;
 
+            counter.text = string.Concat(slotData.Amount, " / ", slotData.SlotCapacity);
             OnApply();
         };
     }

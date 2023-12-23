@@ -463,41 +463,41 @@ MonoBehaviour:
   Columns: 6
   InventoryData:
     Slots:
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      amount: 6
-    - Item: {fileID: 0}
+    - item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
       amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
-      amount: 161
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
+      amount: 175
+    - item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
+      amount: 4
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
+    - item: {fileID: 0}
       amount: 5
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
+      amount: 7
+    - item: {fileID: 0}
       amount: 0
-    - Item: {fileID: 0}
-      amount: 0
-    - Item: {fileID: 0}
+    - item: {fileID: 0}
       amount: 0
 --- !u!65 &1447225376
 BoxCollider:

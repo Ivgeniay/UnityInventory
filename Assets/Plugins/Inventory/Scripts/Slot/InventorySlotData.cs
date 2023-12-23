@@ -6,8 +6,19 @@ namespace InventorySystem
     [System.Serializable]
     public class InventorySlotData
     {
-        [SerializeField] public ItemBase Item;
+        [SerializeField] public ItemBase item;
         [SerializeField] private int amount;
+
+        public ItemBase Item
+        {
+            get { return item; }
+            set { 
+                if (value == null)
+                    amount = 0;
+                
+                item = value; 
+            }
+        }
         public virtual string ItemId
         {
             get
