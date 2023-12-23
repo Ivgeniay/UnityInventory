@@ -1,0 +1,10 @@
+.backgroundSt {
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
+    border-bottom-left-radius: 17px;
+    max-width: 75px;
+    max-height: 75px;
+    min-width: 15px;
+    min-height: 15px;
+}

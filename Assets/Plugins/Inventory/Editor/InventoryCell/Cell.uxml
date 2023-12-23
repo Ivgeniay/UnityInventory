@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Plugins/Inventory/Editor/InventoryCell/cellStyles.uss?fileID=7433441132597879392&amp;guid=123bf536d7e626e4ebfdeee168587f9e&amp;type=3#cellStyles" />
+    <ui:VisualElement name="cellBackground" class="backgroundSt" style="flex-grow: initial; flex-shrink: initial; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; max-width: 67px;">
+        <uie:ObjectField type="InventorySystem.ItemBase, Inventory" style="height: 67px; width: 62px; background-color: rgba(0, 0, 0, 0);" />
+    </ui:VisualElement>
+</ui:UXML>
