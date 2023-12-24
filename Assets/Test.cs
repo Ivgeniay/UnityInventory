@@ -12,22 +12,22 @@ public class Test : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            inventoryComponent.Service.Add(inventoryItem.ID, amount);
+            inventoryComponent.Service.Add(inventoryItem, amount);
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            inventoryComponent.Service.Add(coord, inventoryItem.ID, amount);
+            inventoryComponent.Service.Add(coord, inventoryItem, amount);
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            inventoryComponent.Service.Remove(inventoryItem.ID, true, amount);
+            inventoryComponent.Service.Remove(inventoryItem, true, amount);
         }
 
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            inventoryComponent.Service.Remove(coord, inventoryItem.ID, true, amount);
+            inventoryComponent.Service.Remove(coord, inventoryItem, true, amount);
         }
     }
 }

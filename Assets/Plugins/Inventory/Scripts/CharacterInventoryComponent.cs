@@ -61,6 +61,7 @@ namespace InventorySystem
             }
             this.InventoryData = inventoryData;
             this.InventoryConfig = inventoryConfig;
+            Service = new(InventoryData, InventoryConfig);
         }
 #endif
 

@@ -32,6 +32,12 @@ namespace InventorySystem
             AddToFirstAvailableSlot(itemId, remainingAmount, out remainingAmount);
             if (remainingAmount > 0) OnItemsDroppedEvent?.Invoke(new InventoryDroppedEventArgs(itemId, remainingAmount));
         }
+        public void Add(ItemBase item, int amount = 1)
+        {
+            ItemsDataBase.Instance.AddItem(item);
+            Add(item.gameObject.GetInstanceID().ToString(), amount);
+        }
+
         public void Add(Vector2Int slotCoordinate, string itemId, int amount = 1)
         {
             int rowLength = inventoryConfig.InventorySize.x;
@@ -75,6 +81,13 @@ namespace InventorySystem
                     );
             }
         }
+        public void Add(Vector2Int slotCoordinate, ItemBase item, int amount = 1)
+        {
+            ItemsDataBase.Instance.AddItem(item);
+            Add(slotCoordinate, item.gameObject.GetInstanceID().ToString(), amount);
+        }
+
+
         public bool Remove(string itemId, bool isDrop = true, int amount = 1)
         {
             if (!Has(itemId, amount)) return false;
@@ -105,6 +118,12 @@ namespace InventorySystem
 
             return true;
         }
+        public bool Remove(ItemBase item, bool isDrop = true, int amount = 1)
+        {
+            ItemsDataBase.Instance.AddItem(item);
+            return Remove(item.gameObject.GetInstanceID().ToString(), isDrop, amount);
+        }
+        
         public bool Remove(Vector2Int slotCoordinate, string itemId, bool isDrop = true, int amount = 1)
         {
             Vector2Int size = inventoryConfig.InventorySize;
@@ -135,6 +154,13 @@ namespace InventorySystem
 
             return true;
         }
+
+        public bool Remove(Vector2Int slotCoordinate, ItemBase item, bool isDrop = true, int amount = 1)
+        {
+            ItemsDataBase.Instance.AddItem(item);
+            return Remove(slotCoordinate, item.gameObject.GetInstanceID().ToString(), isDrop, amount);
+        } 
+
         public bool Has(string itemId, int amount = 1)
         {
             IEnumerable<InventorySlotData> allSlotsWithItem = inventoryData.Slots.Where(e => e.ItemId == itemId);
@@ -143,6 +169,12 @@ namespace InventorySystem
                 sumExist += slot.Amount;
 
             return sumExist >= amount;
+        }
+
+        public bool Has(ItemBase item, int amount = 1)
+        {
+            ItemsDataBase.Instance.AddItem(item); 
+            return Has(item.gameObject.GetInstanceID().ToString(), amount); 
         }
 
         private void AddToSlotsWithSameItem(string itemId, int amount, out int remainingAmount)
@@ -211,7 +243,6 @@ namespace InventorySystem
                     if (!slot.IsEmpty()) continue;
 
                     slot.Item = value;
-                    //slot.ItemId = itemId;
 
                     int newValue = remainingAmount;
                     int itemsToAddAmount = 0;
