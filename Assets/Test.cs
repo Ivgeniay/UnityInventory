@@ -22,10 +22,17 @@ public class Test : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            inventoryComponent.Service.Remove(inventoryItem, true, amount);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                inventoryComponent.Service.RemoveLast(inventoryItem, true, amount); 
+            }
+            else
+            {
+                inventoryComponent.Service.RemoveFirst(inventoryItem, true, amount);
+            }
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             inventoryComponent.Service.Remove(coord, inventoryItem, true, amount);
         }

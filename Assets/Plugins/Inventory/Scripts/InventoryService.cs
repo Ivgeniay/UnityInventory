@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using PlasticGui.PreferencesWindow;
 using UnityEditor.Graphs;
+using Codice.Client.BaseCommands.BranchExplorer;
 
 namespace InventorySystem
 {
@@ -88,19 +89,22 @@ namespace InventorySystem
         }
 
 
-        public bool Remove(string itemId, bool isDrop = true, int amount = 1)
+        public bool RemoveFirst(string itemId, bool isDrop = true, int amount = 1)
         {
             if (!Has(itemId, amount)) return false;
 
             var amountToRemove = amount;
             Vector2Int size = inventoryConfig.InventorySize;
+            int rows = size.y;
+            int cols = size.x;
             int rowLength = size.x;
-            for (int i = 0; i < size.x; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < size.y; j++)
+                for (int j = 0; j < cols; j++)
                 {
-                    Vector2Int slotCoordinates = new Vector2Int(i, j);
-                    InventorySlotData slot = inventoryData.Slots[slotCoordinates.x + rowLength * slotCoordinates.y];
+                    Vector2Int slotCoordinates = new Vector2Int(j, i); 
+                    int index = slotCoordinates.x + rowLength * slotCoordinates.y;
+                    InventorySlotData slot = inventoryData.Slots[index];
                     
                     if (slot.ItemId != itemId) continue;
                     if (amountToRemove > slot.Amount)
@@ -118,12 +122,11 @@ namespace InventorySystem
 
             return true;
         }
-        public bool Remove(ItemBase item, bool isDrop = true, int amount = 1)
+        public bool RemoveFirst(ItemBase item, bool isDrop = true, int amount = 1)
         {
             ItemsDataBase.Instance.AddItem(item);
-            return Remove(item.gameObject.GetInstanceID().ToString(), isDrop, amount);
+            return RemoveFirst(item.gameObject.GetInstanceID().ToString(), isDrop, amount);
         }
-        
         public bool Remove(Vector2Int slotCoordinate, string itemId, bool isDrop = true, int amount = 1)
         {
             Vector2Int size = inventoryConfig.InventorySize;
@@ -154,12 +157,50 @@ namespace InventorySystem
 
             return true;
         }
-
         public bool Remove(Vector2Int slotCoordinate, ItemBase item, bool isDrop = true, int amount = 1)
         {
             ItemsDataBase.Instance.AddItem(item);
             return Remove(slotCoordinate, item.gameObject.GetInstanceID().ToString(), isDrop, amount);
-        } 
+        }
+
+        public bool RemoveLast(string itemId, bool isDrop = true, int amount = 1)
+        {
+            if (!Has(itemId, amount)) return false;
+
+            var amountToRemove = amount;
+            Vector2Int size = inventoryConfig.InventorySize;
+            int rows = size.y;
+            int cols = size.x;
+            int rowLength = size.x;
+            for (int i = rows - 1; i >= 0; i--)
+            {
+                for (int j = cols - 1; j >= 0; j--)
+                {
+                    Vector2Int slotCoordinates = new Vector2Int(j, i);
+                    int index = slotCoordinates.x + rowLength * slotCoordinates.y;
+                    InventorySlotData slot = inventoryData.Slots[index];
+
+                    if (slot.ItemId != itemId) continue;
+                    if (amountToRemove > slot.Amount)
+                    {
+                        amountToRemove -= slot.Amount;
+                        Remove(slotCoordinates, itemId, isDrop, slot.Amount);
+                    }
+                    else
+                    {
+                        Remove(slotCoordinates, itemId, isDrop, amountToRemove);
+                        return true;
+                    }
+                }
+            }
+
+            return true;
+        }
+        public bool RemoveLast(ItemBase item, bool isDrop = true, int amount = 1)
+        {
+            ItemsDataBase.Instance.AddItem(item);
+            return RemoveLast(item.gameObject.GetInstanceID().ToString(), isDrop, amount);
+        }
 
         public bool Has(string itemId, int amount = 1)
         {
@@ -170,7 +211,6 @@ namespace InventorySystem
 
             return sumExist >= amount;
         }
-
         public bool Has(ItemBase item, int amount = 1)
         {
             ItemsDataBase.Instance.AddItem(item); 
@@ -180,15 +220,18 @@ namespace InventorySystem
         private void AddToSlotsWithSameItem(string itemId, int amount, out int remainingAmount)
         {
             Vector2Int size = inventoryConfig.InventorySize;
+            int rows = size.y;
+            int cols = size.x;
             int rowLength = size.x;
             remainingAmount = amount;
 
-            for (int i = 0; i < size.x; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < size.y; j++)
+                for (int j = 0; j < cols; j++)
                 {
-                    Vector2Int coordinates = new Vector2Int(i, j);
-                    InventorySlotData slot = inventoryData.Slots[coordinates.x + rowLength * coordinates.y];
+                    Vector2Int coordinates = new Vector2Int(j, i);
+                    int index = coordinates.x + rowLength * coordinates.y;
+                    InventorySlotData slot = inventoryData.Slots[index];
                     
                     if (slot.IsEmpty()) continue;
                     if (slot.Amount >= slot.SlotCapacity) continue;             
@@ -230,15 +273,18 @@ namespace InventorySystem
             if (!isExist) throw new Exception();
 
             Vector2Int size = inventoryConfig.InventorySize;
+            int rows = size.y;
+            int cols = size.x;
             int rowLength = size.x;
             remainingAmount = amount;
 
-            for (int i = 0; i < size.x; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < size.y; j++)
+                for (int j = 0; j < cols; j++)
                 {
-                    Vector2Int coordinates = new Vector2Int(i, j);
-                    InventorySlotData slot = inventoryData.Slots[coordinates.x + rowLength * coordinates.y];
+                    Vector2Int coordinates = new Vector2Int(j, i);
+                    int index = coordinates.x + rowLength * coordinates.y;
+                    InventorySlotData slot = inventoryData.Slots[index];
 
                     if (!slot.IsEmpty()) continue;
 

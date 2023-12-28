@@ -43,7 +43,8 @@ namespace InventorySystem
 
         internal void ResizeInventory()
         {
-            var inventoryConfig = new InventoryConfig() { InventorySize = new Vector2Int(Rows, Columns), };
+            //var inventoryConfig = new InventoryConfig() { InventorySize = new Vector2Int(Rows, Columns), };
+            var inventoryConfig = new InventoryConfig() { InventorySize = new Vector2Int(Columns, Rows), };
             int inventorySize = inventoryConfig.InventorySize.x * inventoryConfig.InventorySize.y;
             InventoryData inventoryData = new InventoryData();
             inventoryData.InitializeEmpty(inventorySize);
