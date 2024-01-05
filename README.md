@@ -1,5 +1,8 @@
 # Unity Inventory
 
+![Unity Version](https://img.shields.io/badge/Unity-2021.1%2B-blue.svg)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 ![Inventory Preview](using.gif)
 
 ## Описание
