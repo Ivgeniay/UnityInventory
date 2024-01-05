@@ -545,29 +545,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774574ec03ff3a8438d30b4a768c3f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rows: 2
-  Columns: 6
+  Rows: 3
+  Columns: 4
   InventoryConfig:
-    InventorySize: {x: 2, y: 6}
+    InventorySize: {x: 4, y: 3}
   InventoryData:
     Slots:
-    - item: {fileID: 0}
-      amount: 0
-    - item: {fileID: 0}
-      amount: 0
-    - item: {fileID: 0}
-      amount: 0
-    - item: {fileID: 0}
-      amount: 0
-    - item: {fileID: 0}
-      amount: 0
-    - item: {fileID: 0}
-      amount: 0
     - item: {fileID: 2065003650981607483, guid: c53837824c15aa64c96352665697b8f9,
         type: 3}
       amount: 1
-    - item: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad, type: 3}
+    - item: {fileID: 2065003650981607483, guid: c53837824c15aa64c96352665697b8f9,
+        type: 3}
       amount: 1
+    - item: {fileID: 0}
+      amount: 0
+    - item: {fileID: 0}
+      amount: 0
+    - item: {fileID: 0}
+      amount: 0
+    - item: {fileID: 0}
+      amount: 0
+    - item: {fileID: 0}
+      amount: 0
+    - item: {fileID: 0}
+      amount: 0
     - item: {fileID: 0}
       amount: 0
     - item: {fileID: 0}
@@ -609,7 +610,7 @@ MonoBehaviour:
   inventoryItem: {fileID: 277361730241795934, guid: 18a2d386ec40ef74ca3388fc8592e1ad,
     type: 3}
   amount: 1
-  coord: {x: 0, y: 4}
+  coord: {x: 2, y: 0}
 --- !u!4 &1500108794
 Transform:
   m_ObjectHideFlags: 0
